@@ -13,6 +13,7 @@ export default function Header({ toggleCart }) {
         <NavLink to="/"      style={styles.link} end>Home</NavLink>
         <NavLink to="/products" style={styles.link}>Products</NavLink>
         <NavLink to="/about" style={styles.link}>About</NavLink>
+<NavLink to="/contact" activeClassName="active">Contact Us</NavLink>
       </nav>
       <span onClick={toggleCart} style={styles.cart}>🛒 {totalQty}</span>
     </header>
