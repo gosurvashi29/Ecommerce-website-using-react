@@ -1,0 +1,26 @@
+.zoom-img {
+  width: 150px;
+  height: auto;
+  margin: 10px;
+  transition: transform 0.3s ease-in-out;
+  cursor: zoom-in;
+}
+
+.zoom-img:hover {
+  transform: scale(2);
+}
+
+.image-gallery {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.product-detail {
+  padding: 20px;
+}
+
+.reviews ul {
+  list-style-type: none;
+  padding-left: 0;
+}

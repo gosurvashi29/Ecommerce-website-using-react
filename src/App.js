@@ -6,8 +6,8 @@ import ProductList from './ProductList';
 import CartPage from './Cart';
 import About from './About';
 import Home from './Home';
-import ContactUs from './ContactUs'; 
-
+import ContactUs from './ContactUs';
+import ProductDetails from './ProductDetails';
 
 export default function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -24,8 +24,9 @@ export default function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/about" component={About} />
-            <Route path="/products" component={ProductList} />
-            <Route path="/contact" component={ContactUs} /> {/* ✅ Contact Us route */}
+            <Route exact path="/products" component={ProductList} />
+            <Route path="/products/:productId" component={ProductDetails} />
+            <Route path="/contact" component={ContactUs} />
             <Redirect to="/" />
           </Switch>
         </main>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useCart } from './CartContext';
+import { useParams } from 'react-router-dom';
+import './ProductDetails.css';
 
-const products = [
+const DUMMY_PRODUCTS = [
   {
     id: 'p1',
     title: 'Colors',
@@ -41,46 +41,33 @@ const products = [
   },
 ];
 
-export default function ProductList() {
-  const { addToCart } = useCart();
+
+export default function ProductDetails() {
+  const { productId } = useParams();
+  const product = DUMMY_PRODUCTS.find(p => p.id === productId);
+
+  if (!product) return <p>Product not found.</p>;
 
   return (
-    <div style={styles.products}>
-      {products.map(item => (
-        <div key={item.id} style={styles.card}>
-          <Link to={`/products/${item.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <img src={item.imageUrl} alt={item.title} style={styles.img} />
-            <h3>{item.title}</h3>
-          </Link>
-          <p>₹{item.price}</p>
-          <button style={styles.btn} onClick={() => addToCart(item)}>
-            Add to Cart
-          </button>
-        </div>
-      ))}
+    <div className="product-detail">
+      <h2>{product.title}</h2>
+      <p><strong>Price:</strong> ₹{product.price}</p>
+      <p>{product.description}</p>
+
+      <div className="image-gallery">
+        {product.images.map((url, index) => (
+          <img key={index} src={url} alt={`img-${index}`} className="zoom-img" />
+        ))}
+      </div>
+
+      <div className="reviews">
+        <h3>Customer Reviews</h3>
+        <ul>
+          {product.reviews.map((rev, i) => (
+            <li key={i}>⭐ {rev}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
-
-const styles = {
-  products: { display: 'flex', gap: 20, flexWrap: 'wrap', marginTop: 20 },
-  card: {
-    width: 180,
-    border: '1px solid #ddd',
-    padding: 12,
-    borderRadius: 6,
-    textAlign: 'center',
-    boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
-    transition: 'transform 0.2s ease',
-  },
-  img: { width: '100%', borderRadius: 4, height: 150, objectFit: 'cover' },
-  btn: {
-    background: '#007bff',
-    color: '#fff',
-    border: 'none',
-    padding: '6px 12px',
-    cursor: 'pointer',
-    borderRadius: 4,
-    marginTop: 8,
-  },
-};
